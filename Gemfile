@@ -1,3 +1,5 @@
 source :rubygems
-
-gem "showoff"
+gem 'bluecloth'
+gem 'nokogiri'
+gem 'showoff'
+gem 'gli'
