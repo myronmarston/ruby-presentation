@@ -147,7 +147,64 @@
 
 * Original superclass chain: `Bird < Object`
 * Module inclusion creates an anonymous proxy class containing the
-  modules methods--`(Flyer)`
+  module's methods: `(Flyer)`
 * Ruby inserts this proxy class in the superclass chain: `Bird <
   (Flyer) < Object`
 
+!SLIDE
+
+## You can also apply a module to an individual object instance.
+
+    @@@ Ruby
+    class Mammal
+      def can_fly?
+        false
+      end
+    end
+
+    bat = Mammal.new
+    bat.extend(Flyer)
+    bat.can_fly? # => true
+
+    cow = Mammal.new
+    cow.can_fly? # => false
+
+!SLIDE bullets incremental
+
+# Singleton classes
+### (AKA metaclasses or eigenclasses)
+
+* Every object has a (potential) singleton class.
+* It allows _per object_ behavior.
+* For the most part, singleton classes are transparent.
+* Ruby automatically creates them when needed.
+
+!SLIDE bullets incremental
+
+# What happens when you extend a module on an object?
+
+* Original ancestor chain: `(bat singleton) < Mammal`
+* Module extension creates an anonymous proxy class containing
+  the module's methods: `(Flyer)`
+* Ruby inserts this proxy class in the ancestor chain:
+  `(bat singleton) < (Flyer) < Mammal`
+
+!SLIDE small
+
+# You can also define methods on individual objects
+
+    @@@ Ruby
+    dolphin = Mammal.new
+    def dolphin.can_swim?
+      true
+    end
+
+    dolphin.can_swim? # => true
+    Mammal.new.can_swim? # => raises NoMethodError
+
+!SLIDE bullets incremental
+
+## We said earlier that classes hold methods--so what class holds this method?
+
+* Answer: dolphin's singleton class.
+* We'll see how method dispatch works in a bit.
