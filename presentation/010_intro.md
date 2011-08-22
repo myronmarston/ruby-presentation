@@ -15,7 +15,7 @@
 
 ## Ruby is...
 
-* A dynamic, object-oriented scripting language suited to many tasks.
+* A language that allows you to express more with less code.
 * "The bastard child of perl and smalltalk" (with a bit of lisp thrown in)
 * A language designed to make programmers happy!
 

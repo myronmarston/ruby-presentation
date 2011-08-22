@@ -24,40 +24,9 @@
 
 !SLIDE
 
-# Classes:
+# Classes
 
-    @@@ Ruby
-    def factory(klass, *args)
-      klass.new(*args)
-    end
-
-!SLIDE
-
-# Classes:
-
-    @@@ Ruby
-    def factory(klass, *args)
-      klass.new(*args)
-    end
-
-    factory(MyClass, :foo)
-    # => returns a new instance of MyClass
-    #    initialized with :foo
-
-!SLIDE
-
-# Classes:
-
-    @@@ Ruby
-    def factory(klass, *args)
-      klass.new(*args)
-    end
-
-    factory(MyClass, :foo)
-    # => returns a new instance of MyClass
-    #    initialized with :foo
-
-## (Note that you would never actually create a factory method like this--there's no point)
+### (we'll see an example of this later)
 
 !SLIDE incremental bullets
 
@@ -77,10 +46,45 @@
       @max_page = 100
     end
 
+!SLIDE
+
+## What object is holding `@max_page`?
+
+
+    @@@ Ruby
+    class Page
+      @max_page = 100
+    end
+
+
+## Answer: whichever object is
+## `self` when `@max_page = 100` runs.
+
+!SLIDE
+
+    @@@ Ruby
+    # page.rb
+    puts "1. self is #{self.object_id}"
+
+    class Page
+      puts "2. self is #{self.object_id}"
+      @max_page = 100
+    end
+
+    puts "3. self is #{self.object_id}"
+    puts "4. Page is #{Page.object_id}"
+
+!SLIDE commandline incremental
+
+    $ ruby page.rb
+    1. self is 2151990220
+    2. self is 2151900340
+    3. self is 2151990220
+    4. Page is 2151900340
+
 !SLIDE small
 
-# The object referred to by the `Page` constant!
-# (which is an instance of the `Class` class).
+# ...so `max_page` is held by the object referred to by the `Page` constant. (which is an instance of the `Class` class).
 
     @@@ Ruby
     Page.instance_variable_get(:@max_page) # => 100
@@ -96,7 +100,7 @@
 
 !SLIDE bullets incremental
 
-## Our class definition is the same as:
+## Our original class definition is the same as:
 
     @@@ Ruby
     Page = Class.new(Object) do
@@ -113,29 +117,37 @@
 
 ## What is a module?
 
-* A namespace for constants (such as classes)
+* A namespace for constants (such as classes).
 * A place to define methods for later use by an object or class.
+* Ruby's alternative to multiple inheritance.
 
 !SLIDE
 
     @@@ Ruby
-    module Furry
-      def has_fur?
+    module Flyer
+      def can_fly?
         true
       end
     end
 
-    class Dog
-      include Furry
+    class Bird
+      include Flyer
     end
 
-    class Cat
-      include Furry
+    class Butterfly
+      include Flyer
     end
 
-    Dog.new.has_fur? # => true
-    Cat.new.has_fur? # => true
+    Bird.new.can_fly? # => true
+    Butterfly.new.can_fly? # => true
 
-!SLIDE
+!SLIDE bullets incremental
 
+# What happens when you include a module in a class?
+
+* Original superclass chain: `Bird < Object`
+* Module inclusion creates an anonymous proxy class containing the
+  modules methods--`(Flyer)`
+* Ruby inserts this proxy class in the superclass chain: `Bird <
+  (Flyer) < Object`
 
