@@ -99,6 +99,17 @@
       end
     end
 
+!SLIDE
+
+# Lazy evaluation
+
+    @@@ Ruby
+    hash.fetch(:foo) do
+      perform_expensive_calculation
+    end
+
+## The block is only run if needed!
+
 !SLIDE bullets incremental small
 
 # How to build block-based APIs
