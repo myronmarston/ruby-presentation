@@ -106,7 +106,7 @@
 * `yield` calls the block with the provided arguments
 * `block_given?` can be used to see if there is a block
 * To store the block for later use (i.e. for callbacks), capture it into
-  a variable using `&`
+  a variable using `&` and invoke it later with `#call`.
 
 !SLIDE small
 
