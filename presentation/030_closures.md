@@ -130,8 +130,8 @@
       end
     end
 
-    Stock.when_value_exceeds(100) { |s| puts "Buy it!" }
+    Stock.when_value_exceeds(100) { |s| puts "Sell it!" }
     apple = Stock.new
     apple.value = 90
-    apple.value = 120 # => causes "Buy it" to be printed
+    apple.value = 120 # => causes "Sell it!" to be printed
 

@@ -60,7 +60,7 @@
 ## Answer: whichever object is
 ## `self` when `@max_page = 100` runs.
 
-!SLIDE
+!SLIDE small
 
     @@@ Ruby
     # page.rb
