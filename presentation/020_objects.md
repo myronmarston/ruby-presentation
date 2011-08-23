@@ -64,23 +64,23 @@
 
     @@@ Ruby
     # page.rb
-    puts "1. self is #{self.object_id}"
+    puts "Before class definition, self is #{self.object_id}"
 
     class Page
-      puts "2. self is #{self.object_id}"
+      puts "In class definition, self is #{self.object_id}"
       @max_page = 100
     end
 
-    puts "3. self is #{self.object_id}"
-    puts "4. Page is #{Page.object_id}"
+    puts "After class definition, self is #{self.object_id}"
+    puts "Page is #{Page.object_id}"
 
 !SLIDE commandline incremental
 
     $ ruby page.rb
-    1. self is 2151990220
-    2. self is 2151900340
-    3. self is 2151990220
-    4. Page is 2151900340
+    Before class definition, self is 2148460880
+    In class definition, self is 2148393520
+    After class definition, self is 2148460880
+    Page is 2148393520
 
 !SLIDE small
 

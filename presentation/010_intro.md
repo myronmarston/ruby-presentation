@@ -13,7 +13,7 @@
 
 !SLIDE bullets incremental
 
-## Ruby is...
+# Ruby is...
 
 * A language that allows you to express more with less code.
 * "The bastard child of perl and smalltalk" (with a bit of lisp thrown in)
